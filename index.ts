@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-require-imports, no-console */
-// Copyright 2018 Canva Inc. All Rights Reserved.
+// Copyright 2021 Canva Inc. All Rights Reserved.
 
 /**
  * Generates Closure Compiler externs from the TypeScript declaration (.d.ts) files of libraries

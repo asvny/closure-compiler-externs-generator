@@ -1,4 +1,4 @@
-// Copyright 2018 Canva Inc. All Rights Reserved.
+// Copyright 2021 Canva Inc. All Rights Reserved.
 
 import * as fs from 'fs';
 import * as path from 'path';

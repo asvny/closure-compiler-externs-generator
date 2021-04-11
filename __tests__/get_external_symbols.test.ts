@@ -1,4 +1,4 @@
-// Copyright 2018 Canva Inc. All Rights Reserved.
+// Copyright 2021 Canva Inc. All Rights Reserved.
 
 import type { Symbol } from '../get_external_symbols';
 import { getExternalSymbols, SymbolType } from '../get_external_symbols';
