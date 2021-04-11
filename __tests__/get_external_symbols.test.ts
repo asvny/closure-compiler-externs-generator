@@ -1,10 +1,11 @@
 // Copyright 2021 Canva Inc. All Rights Reserved.
 
-import type { Symbol } from '../get_external_symbols';
+import type { ExternalSymbol } from '../get_external_symbols';
 import { getExternalSymbols, SymbolType } from '../get_external_symbols';
 
 describe('getExternalSymbols', () => {
   it('follows imports', () => {
+    expect.hasAssertions();
     const files: { [key: string]: string } = {
       '/src/entry.d.ts': 'import "./foo"',
       '/src/foo.d.ts': 'declare const foo: string;',
@@ -25,6 +26,7 @@ describe('getExternalSymbols', () => {
   });
 
   it('follows exports with module specifiers', () => {
+    expect.hasAssertions();
     const files: { [key: string]: string } = {
       '/src/entry.d.ts': 'export { default } from "./foo"',
       '/src/foo.d.ts': 'declare const foo: string;',
@@ -44,6 +46,7 @@ describe('getExternalSymbols', () => {
   });
 
   it('follows file references', () => {
+    expect.hasAssertions();
     const files: { [key: string]: string } = {
       '/src/entry.d.ts': '/// <reference path="sub/ref.entry.d.ts" />',
       '/src/sub/ref.entry.d.ts': 'declare const foo: string;',
@@ -61,6 +64,7 @@ describe('getExternalSymbols', () => {
   });
 
   it('does not follow file references that in the dontFollow list', () => {
+    expect.hasAssertions();
     const files: { [key: string]: string } = {
       '/src/entry.d.ts': '/// <reference path="sub/ref.entry.d.ts" />',
       '/src/sub/ref.entry.d.ts': 'declare const foo: string;',
@@ -78,6 +82,7 @@ describe('getExternalSymbols', () => {
   });
 
   it('gets properties from an interface', () => {
+    expect.hasAssertions();
     runWithMockFs(
       `interface Foo {
         prop: string;
@@ -91,6 +96,7 @@ describe('getExternalSymbols', () => {
   });
 
   it('gets properties from a type', () => {
+    expect.hasAssertions();
     runWithMockFs(
       `type Foo {
         prop: string;
@@ -104,6 +110,7 @@ describe('getExternalSymbols', () => {
   });
 
   it('gets properties from a const', () => {
+    expect.hasAssertions();
     runWithMockFs(
       `
       const Foo = {
@@ -119,6 +126,7 @@ describe('getExternalSymbols', () => {
   });
 
   it('gets properties from a class', () => {
+    expect.hasAssertions();
     runWithMockFs(
       `
       class Foo {
@@ -136,10 +144,12 @@ describe('getExternalSymbols', () => {
   });
 
   it('ignores modules', () => {
+    expect.hasAssertions();
     runWithMockFs('declare module Module { }', []);
   });
 
   it('gets properties and declarations from namespaces', () => {
+    expect.hasAssertions();
     runWithMockFs(
       `
       declare namespace Parent.Nested { 
@@ -154,6 +164,7 @@ describe('getExternalSymbols', () => {
   });
 
   it('get properties from an enum', () => {
+    expect.hasAssertions();
     runWithMockFs(
       `
       const enum Foo { 
@@ -167,6 +178,7 @@ describe('getExternalSymbols', () => {
   });
 
   it('gets declarations from declared functions, classes and variables', () => {
+    expect.hasAssertions();
     runWithMockFs(
       `
       declare enum Enum { };
@@ -188,6 +200,7 @@ describe('getExternalSymbols', () => {
   });
 
   it('gets properties from non-declared functions, classes and variables', () => {
+    expect.hasAssertions();
     runWithMockFs(
       `
       enum Enum { };
@@ -222,9 +235,11 @@ describe('getExternalSymbols', () => {
   }
 
   function checkSymbols(
-    symbols: Symbol[],
+    symbols: ExternalSymbol[],
     expected: { name: string; type: SymbolType }[],
   ) {
-    expect(symbols.map(({ name, type }) => ({ name, type }))).toEqual(expected);
+    expect(symbols.map(({ name, type }) => ({ name, type }))).toStrictEqual(
+      expected,
+    );
   }
 });

@@ -19,7 +19,7 @@ function usage() {
   ${name} --librariesPath /path/to/libraries.js --out externs/generated/`);
 }
 
-export function main() {
+export function main(): void {
   let out: string | undefined;
   let libraries: Library[] | undefined;
   let debug = false;
@@ -34,11 +34,13 @@ export function main() {
       case '--out':
         out = args.shift();
         break;
-      case '--librariesPath':
+      case '--librariesPath': {
         const librariesPath = args.shift();
         assert(librariesPath, 'No libraries path given');
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
         libraries = require(path.resolve(librariesPath)).libraries;
         break;
+      }
       case '--debug':
         debug = true;
         break;

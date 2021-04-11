@@ -13,7 +13,7 @@ import { EOL } from 'os';
 import * as path from 'path';
 import type * as ts from 'typescript';
 import walkSync from 'walk-sync';
-import type { Symbol } from './get_external_symbols';
+import type { ExternalSymbol } from './get_external_symbols';
 import { getExternalSymbols } from './get_external_symbols';
 import { Library } from './library';
 
@@ -69,7 +69,7 @@ export type FS = {
 function writeSymbols(
   to: string,
   identifier: string,
-  symbols: Symbol[],
+  symbols: ExternalSymbol[],
   debug = false,
   fileSystem: FS = fs,
 ) {
@@ -154,7 +154,7 @@ export function processLibraries(
   libraries: readonly Library[],
   debug: boolean,
   fileSystem: FS,
-) {
+): void {
   const libraryToDeclarationPaths = getDeclarationPaths(libraries);
 
   // Collect all declaration paths.

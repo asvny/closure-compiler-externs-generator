@@ -29,7 +29,7 @@ export const enum SymbolType {
   PROPERTY = 'PROPERTY',
 }
 
-export type Symbol = {
+export type ExternalSymbol = {
   type: SymbolType;
   name: string;
   node: ts.Node;
@@ -62,7 +62,7 @@ export function getExternalSymbols(
   dontFollow: Iterable<string> = [],
   readFileSync: typeof defaultReadFileSync = defaultReadFileSync,
   resolveModule: typeof defaultResolveModule = defaultResolveModule,
-): Symbol[] {
+): ExternalSymbol[] {
   const sourceFiles = Array.from(files, (file) => {
     const source = readFileSync(file);
     return ts.createSourceFile(file, source, ts.ScriptTarget.ES2015, true);
@@ -71,11 +71,13 @@ export function getExternalSymbols(
   const mergedDontFollow = new Set(
     [...files, ...dontFollow].map((p) => path.resolve(p)),
   );
-  return sourceFiles.filter(isNotIgnored).reduce((symbols: Symbol[], file) => {
-    return symbols.concat(
-      findSymbolNames(file, mergedDontFollow, readFileSync, resolveModule),
-    );
-  }, []);
+  return sourceFiles
+    .filter(isNotIgnored)
+    .reduce((symbols: ExternalSymbol[], file) => {
+      return symbols.concat(
+        findSymbolNames(file, mergedDontFollow, readFileSync, resolveModule),
+      );
+    }, []);
 }
 
 /**
@@ -86,8 +88,8 @@ function findSymbolNames(
   dontFollow: Set<string>,
   readFileSync: typeof defaultReadFileSync,
   resolveModule: typeof defaultResolveModule,
-): Symbol[] {
-  const symbols: Symbol[] = [];
+): ExternalSymbol[] {
+  const symbols: ExternalSymbol[] = [];
   visitNode(sourceFile);
   return symbols;
 

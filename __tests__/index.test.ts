@@ -1,31 +1,33 @@
 import { processLibraries, FS } from '../index';
-import { vol, Volume, createFsFromVolume } from 'memfs';
+import { Volume, createFsFromVolume } from 'memfs';
 import { libraries } from './fixtures/libraries';
 import { applyDefaults, ExternImportError } from '../library';
 
+function createVolumeAndFs() {
+  const volume = new Volume();
+  const fs = createFsFromVolume(volume) as FS;
+
+  return {
+    fs,
+    volume,
+  };
+}
+
 describe('externs-generator', () => {
-  let fs: FS;
-  let volume: typeof vol;
-
-  function assertVolumeSnapshot() {
-    expect(volume.toJSON()).toMatchSnapshot();
-  }
-
-  beforeEach(() => {
-    volume = new Volume();
-    fs = createFsFromVolume(volume) as any;
-  });
-
   describe('generation', () => {
     it.each([false, true])(
       'produces externs for a given set of modules with debug = %s',
       (debug) => {
+        expect.hasAssertions();
+        const { volume, fs } = createVolumeAndFs();
         processLibraries('/', libraries, debug, fs);
-        assertVolumeSnapshot();
+        expect(volume.toJSON()).toMatchSnapshot();
       },
     );
 
     it('for scoped modules', () => {
+      expect.hasAssertions();
+      const { volume, fs } = createVolumeAndFs();
       processLibraries(
         '/',
         [
@@ -36,11 +38,13 @@ describe('externs-generator', () => {
         false,
         fs,
       );
-      assertVolumeSnapshot();
+      expect(volume.toJSON()).toMatchSnapshot();
     });
   });
   describe('libraries definition', () => {
     it('throws on missing extern imports', () => {
+      expect.hasAssertions();
+      const { fs } = createVolumeAndFs();
       expect(() =>
         processLibraries(
           '/',
@@ -53,7 +57,7 @@ describe('externs-generator', () => {
           false,
           fs,
         ),
-      ).toThrowError(ExternImportError);
+      ).toThrow(ExternImportError);
     });
   });
 });
