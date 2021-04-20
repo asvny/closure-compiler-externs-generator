@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Generates externs for closure compiler from TypeScript declarations",
   "main": "index.js",
-  "repository": "git@github.com:Canva/closure-compiler-externs-generator-public.git",
+  "repository": "git@github.com:canva-public/closure-compiler-externs-generator.git",
   "author": "Canva Pty Ltd.",
   "license": "MIT",
   "private": true,
