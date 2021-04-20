@@ -1,6 +1,6 @@
 # Generate Externs from Typescript definitions
 
-![build](https://github.com/Canva/closure-compiler-externs-generator-public/actions/workflows/node.js.yml/badge.svg)
+![build](https://github.com/canva-public/closure-compiler-externs-generator/actions/workflows/node.js.yml/badge.svg)
 
 Generates externs for closure compiler from the TypeScript declarations of libraries listed in a given libraries definition file.
 
