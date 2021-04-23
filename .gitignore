@@ -2,4 +2,6 @@
 /.eslintcache
 /coverage
 /coverage-report.tar.gz
+/dist
 /node_modules
+canva-public-closure-compiler-externs-generator-*.tgz
