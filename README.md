@@ -64,3 +64,10 @@ used by a library. So this tool generates externs for a library in 4 steps:
 ## Caveats
 
 The generated externs only contain symbol data, no type information.
+
+## Releasing
+
+- Bump the version of `package.json` to a meaningful version for the changes since the last release (we follow semver).
+- To do a dry-run of the release and what would go out in the package you can manually execute the [npm-publish](https://github.com/canva-public/closure-compiler-externs-generator/actions/workflows/npm-publish.yml) workflow on the `main` branch. It will do a dry-run publish (not actually publish the new version).
+- Draft a new release in the github project - please use a tag named `vX.X.X` (where `X.X.X` is the new to-be-releases semver of the package - please add as many detail as possible to the release description.
+- Once you're ready, `Publish` the release. Publishing will trigger the [npm-publish](https://github.com/canva-public/closure-compiler-externs-generator/actions/workflows/npm-publish.yml) workflow on the tag and do the actual publish to npm.
