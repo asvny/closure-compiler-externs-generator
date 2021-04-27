@@ -6,7 +6,7 @@ import { Library } from './library';
 import assert from 'assert';
 import { processLibraries } from './index';
 
-const name = '@canva-public/closure-compiler-externs-generator';
+const name = '@canva/closure-compiler-externs-generator';
 
 function usage() {
   console.log(`usage: ${name} --out <dir> --librariesPath <path>  [--debug]

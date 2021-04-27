@@ -1,7 +1,7 @@
 # Generate Externs from Typescript definitions
 
 [![build](https://github.com/canva-public/closure-compiler-externs-generator/actions/workflows/node.js.yml/badge.svg)](https://github.com/canva-public/closure-compiler-externs-generator/actions/workflows/node.js.yml)
-[![npm](https://img.shields.io/npm/v/@canva-public/closure-compiler-externs-generator.svg)](https://www.npmjs.com/package/@canva-public/closure-compiler-externs-generator)
+[![npm](https://img.shields.io/npm/v/@canva/closure-compiler-externs-generator.svg)](https://www.npmjs.com/package/@canva/closure-compiler-externs-generator)
 
 Generates externs for closure compiler from the TypeScript declarations of libraries listed in a given libraries definition file.
 
@@ -9,16 +9,16 @@ Generates externs for closure compiler from the TypeScript declarations of libra
 
 ```bash
 # yarn
-yarn add -D @canva-public/closure-compiler-externs-generator
+yarn add -D @canva/closure-compiler-externs-generator
 
 # npm
-npm install --save-dev @canva-public/closure-compiler-externs-generator
+npm install --save-dev @canva/closure-compiler-externs-generator
 ```
 
 ## Usage
 
 ```
-npx @canva-public/closure-compiler-externs-generator --librariesPath ./path/to/libraries.js --out ./my_externs
+npx @canva/closure-compiler-externs-generator --librariesPath ./path/to/libraries.js --out ./my_externs
 ```
 
 To include symbol source information in the output add the `--debug` flag to the execution.
